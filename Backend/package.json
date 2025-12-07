@@ -1,7 +1,7 @@
 {
   "name": "verdicto-backend",
   "version": "1.0.0",
-  "description": "verdicto",
+  "description": "verdicto-backend",
   "main": "index.js",
   "type": "module",
   "scripts": {
