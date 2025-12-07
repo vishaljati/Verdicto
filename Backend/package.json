@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "verdicto",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js",
+    "start": "node -r dotenv/config --experimental-json-modules src/index.js",
+    "prettier": "prettier --write \"src/**/*.js\""
   },
   "keywords": [
     "node",
@@ -20,7 +23,10 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mongoose": "^9.0.1",
-    "multer": "^2.0.2",
-    "nodemon": "^3.1.11"
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11",
+    "prettier": "^3.7.4"
   }
 }
