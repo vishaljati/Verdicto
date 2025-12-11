@@ -27,7 +27,7 @@ const userSchema = new Schema(
         debateHistory: [
             {
                 type: mongoose.Schema.Types.ObjectId, // debateHistory id
-                ref: "DebateHistory",
+                ref: "DebateSession",
             }
         ],
 
