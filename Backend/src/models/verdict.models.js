@@ -26,7 +26,7 @@ const verdictSchema=new mongoose.Schema({
      nextActions:[{
         type:String
      }],
-},{
+   },{
     timestamps:true
 })
 
