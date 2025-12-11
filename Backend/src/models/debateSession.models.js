@@ -1,36 +1,41 @@
 import mongoose from "mongoose";
 
-const debateSessionSchema=new mongoose.Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        required:true
+const debateSessionSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    problem:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Problem",
-        required:true
+    problem: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Problem",
+      required: true,
     },
-    status:{
-        enum:["running","completed","failed"],
-        default:"running"
+    status: {
+      enum: ["running", "completed", "failed"],
+      default: "running",
     },
-    model:{
-        type:String,
-        required:true
+    model: {
+      type: String,
+      required: true,
     },
-    rounds:{
-        type:Number,
-        default:1
+    rounds: {
+      type: Number,
+      default: 1,
     },
-    verdict:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Verdict"
+    verdict: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Verdict",
     },
-    setting:{
-        type:Object
-    }
+    setting: {
+      type: Object,
+    },
+  },
+  { timestamps: true }
+);
 
-},{timestamps:true})
-
-export const DebateSession=mongoose.model("DebateSession",debateSessionSchema)
+export const DebateSession = mongoose.model(
+  "DebateSession",
+  debateSessionSchema
+);

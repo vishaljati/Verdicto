@@ -1,34 +1,36 @@
 import mongoose from "mongoose";
 
-const subscriptionSchema=new mongoose.Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        unique:true
+const subscriptionSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      unique: true,
     },
-    plan:{
-        enum:["free","pro","enterprise"],
-        default:"free"
+    plan: {
+      enum: ["free", "pro", "enterprise"],
+      default: "free",
     },
-    status:{
-        enum:["active","cancelled"],
-        default:"active"
+    status: {
+      enum: ["active", "cancelled"],
+      default: "active",
     },
-    currentPeriodStart:{
-        type:Date,
-        required:true
+    currentPeriodStart: {
+      type: Date,
+      required: true,
     },
-    currentPeriodEnd:{
-        type:Date,
-        required:true
+    currentPeriodEnd: {
+      type: Date,
+      required: true,
     },
-    stripeCustomerId:{
-        type:String,    
+    stripeCustomerId: {
+      type: String,
     },
-    stripeSubscriptionId:{
-        type:String,
-    }
+    stripeSubscriptionId: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
-},{timestamps:true})
-
-export const Subscription=mongoose.model("Subscription",subscriptionSchema)
+export const Subscription = mongoose.model("Subscription", subscriptionSchema);
