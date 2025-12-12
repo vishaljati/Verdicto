@@ -33,9 +33,7 @@ const getUserProfile = AsyncHandler(async (req, res) => {
 
 const updateProfile = AsyncHandler(async (req, res) => {
   const { fullName } = req.body;
-  if (!fullName) {
-    throw new ApiError(401, "Full name is required");
-  }
+
   const user = req.user;
   const avatarFilePath = req.file?.path || null;
   let avatar;
@@ -53,7 +51,7 @@ const updateProfile = AsyncHandler(async (req, res) => {
       $set: {
         avatar: avatar?.url,
         avatarPublicId: avatar?.public_id,
-        fullName,
+        fullName:fullName || user.fullName,
       },
     },
     { new: true }
@@ -98,7 +96,9 @@ const updatePassword = AsyncHandler(async (req, res) => {
   }
   const user = req.user;
 
-  const ispasswordSame = user.isPasswordCorrect(password);
+  const ispasswordSame = await user.isPasswordCorrect(password);
+  console.log(ispasswordSame);
+  
   if (ispasswordSame) {
     throw new ApiError(401, "Password can not be same");
   }

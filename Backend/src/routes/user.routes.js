@@ -12,11 +12,12 @@ import { verifyJWT } from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 
-router.route("/:userId").get(verifyJWT, getUserById);
+router.route("/id/:userId").get(verifyJWT, getUserById);
 router.route("/me").get(verifyJWT, getUserProfile);
 router
   .route("/update-profile")
   .patch(verifyJWT, upload.single("avatar"), updateProfile);
+  
 router.route("/delete-account").delete(verifyJWT, deleteAccount);
 router.route("/update-password").post(verifyJWT, updatePassword);
 
