@@ -16,16 +16,15 @@ const personaSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
-    model: {
+    systemPromt: {
       type: String,
-      required: true,
+      required: true
     },
-    rounds: {
-      type: Number,
-      required: true,
-      default: 1,
+    isDefault: {
+      type: Boolean,
+      required: true
     },
+
   },
   {
     timestamps: true,
