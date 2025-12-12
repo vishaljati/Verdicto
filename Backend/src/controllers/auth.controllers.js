@@ -13,13 +13,14 @@ import { sendOtp, verifyOtp } from "../utils/OtpUtils.js";
 const generateAccessAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
-    const accessToken = user.generateAccessToken();
+    const accessToken = user.generateAccessToken ();
     const refreshToken = user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
-    user.save({ validateBeforeSave: false });
+    await user.save({ validateBeforeSave: false });
 
     return { accessToken, refreshToken };
+
   } catch (error) {
     console.log("ERROR :", error);
     throw new ApiError(
@@ -72,7 +73,7 @@ const userSignUp = AsyncHandler(async (req, res) => {
   if (!createdUser) {
     throw new ApiError(500, "User sign up failed");
   }
-  const welcomeMail = await sendWelcomeEmail({to:email,name:fullName});
+  const welcomeMail = await sendWelcomeEmail({ to: email, name: fullName });
   if (!welcomeMail) {
     throw new ApiError(500, "Welcome mail sending failed");
   }
@@ -83,22 +84,27 @@ const userSignUp = AsyncHandler(async (req, res) => {
 });
 
 const userLogIn = AsyncHandler(async (req, res) => {
+  if (!req.body) {
+    throw new ApiError(400, "Request body is required");
+  }
   const { email, password } = req.body;
-  if (!(email || password)) {
+  if (!(email && password)) {
     throw new ApiError(409, "Email and Password are required");
   }
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: email });
   if (!user) {
     throw new ApiError(404, "User not found");
   }
-  const isPasswordValid = user.isPasswordCorrect(password);
+  const isPasswordValid = await user.isPasswordCorrect(password);
 
   if (!isPasswordValid) {
     throw new ApiError(401, "Password is incorrect");
   }
 
-  const { accessToken, refreshToken } = generateAccessAndRefreshToken(user._id);
+  const { accessToken, refreshToken } =await generateAccessAndRefreshToken(user._id);
+  
+  
   const options = {
     httpOnly: true,
     secure: true,
@@ -122,7 +128,7 @@ const userLogout = AsyncHandler(async (req, res) => {
     req.user._id,
     {
       $set: {
-        refreshTokens: undefined,
+        refreshToken: undefined,
       },
     },
     {
