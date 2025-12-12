@@ -165,7 +165,7 @@ async function sendWelcomeEmail({ to, name }) {
 }
 
 // 2) OTP email
-async function sendOtpEmail({ to, name, otp, expiresIn }) {
+async function sendOtpEmail({ to, name, otp }) {
   const subject = "Verdicto: Your OTP Code";
   const html = `
     
@@ -273,7 +273,7 @@ async function sendOtpEmail({ to, name, otp, expiresIn }) {
                 </table>
 
                 <p style="margin: 0 0 10px; font-size: 13px; line-height: 1.6; color: #4b5563; text-align: center;">
-                  This OTP is valid for <strong>${expiresIn} minutes</strong>.
+                  This OTP is valid for <strong> 2 minutes</strong>.
                 </p>
 
                 <p style="margin: 0 0 16px; font-size: 13px; line-height: 1.6; color: #4b5563; text-align: center;">
@@ -319,7 +319,7 @@ async function sendOtpEmail({ to, name, otp, expiresIn }) {
                     line-height: 1.4;
                   "
                 >
-                  © {{year}} Verdicto. All rights reserved.
+                  © 2025 Verdicto. All rights reserved.
                 </p>
               </td>
             </tr>
