@@ -273,7 +273,7 @@ async function sendOtpEmail({ to, name, otp }) {
                 </table>
 
                 <p style="margin: 0 0 10px; font-size: 13px; line-height: 1.6; color: #4b5563; text-align: center;">
-                  This OTP is valid for <strong> 2 minutes</strong>.
+                  This OTP is valid for <strong> 5 minutes</strong>.
                 </p>
 
                 <p style="margin: 0 0 16px; font-size: 13px; line-height: 1.6; color: #4b5563; text-align: center;">

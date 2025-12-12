@@ -6,7 +6,7 @@ import { uploadCloudinary, deleteCloudinary } from "../utils/Cloudinary.js";
 import { sendMail, sendWelcomeEmail, sendOtpEmail } from "../utils/SendMail.js";
 import jwt from "jsonwebtoken";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
-import { Otp } from "../models/otp.models.js";
+import { sendOtp, verifyOtp } from "../utils/OtpUtils.js";
 
 //TODO:Include OTP , OAuth callback
 
@@ -30,12 +30,6 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 
 const userSignUp = AsyncHandler(async (req, res) => {
-  /* 1.Take all inputs (fullname,email,avatar,password) 
-         2.check user exist or not
-         3.password check
-         4.provide user access & refresh token
-         5.send cookie*/
-
   const { fullName, email, password } = req.body;
   if (!(fullName || email || password)) {
     throw new ApiError(401, "Email and Password are required");
@@ -53,24 +47,21 @@ const userSignUp = AsyncHandler(async (req, res) => {
   if (!avatar) {
     throw new ApiError(500, "Avatar Upload failed");
   }
-  //  // create otp
-  //     const otp=Math.floor(1000+Math.random()*9000)
-  //     const expireIn=Date.now*2*60*1000; //2 min
-  //     const hashedOtp= await bcrypt.hash(otp, 12)
-  //     const storedOtp=await Otp.create({
-  //         otp:hashedOtp,
-  //         expireIn,
-  //         email,
-  //     })
-  //     await sendOtpEmail(email,fullName,otp)
-  //  //verify otp
-  //     const { userInputOtp }=req.body
-  //     await bcrypt.compare(userInputOtp, storedOtp.otp)
+
+  //TODO:OTP
+  await sendOtp(email, fullName);
+  const { userEnteredOTP } = req.body;
+  const isOtpValid = await verifyOtp(email, userEnteredOTP);
+
+  if (!isOtpValid) {
+    throw new ApiError(401, "OTP does not matched or expired");
+  }
 
   await User.create({
     fullName,
     email,
     avatar: avatar.url,
+    avatarPublicId: avatar.public_id,
     password,
   });
 

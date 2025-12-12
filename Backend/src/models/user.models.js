@@ -18,7 +18,11 @@ const userSchema = new Schema(
       required: true,
     },
     avatar: {
-      type: String,
+      type: String, //cloudinary url
+      required: true,
+    },
+    avatarPublicId: {
+      type: String, //cloudinary public id
       required: true,
     },
     refreshToken: {

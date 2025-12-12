@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const otpSchema = new Schema({
   otp: {
-    type: Number,
+    type: String,
     required: true,
   },
   expireIn: {
@@ -14,5 +14,9 @@ const otpSchema = new Schema({
     required: true,
   },
 });
+
+otpSchema.methods.isOtpCorrect = async function (userOtp) {
+  return await bcrypt.compare(userOtp, this.otp);
+};
 
 export const Otp = mongoose.model("Otp", otpSchema);
