@@ -1,5 +1,4 @@
 import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
 import jwt from "jsonwebtoken"
 import { User } from "../models/user.models"
 import { AsyncHandler } from "../utils/AsyncHandler";
