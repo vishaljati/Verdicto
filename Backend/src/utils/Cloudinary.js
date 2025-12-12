@@ -13,12 +13,17 @@ const uploadCloudinary = async (localFilePath) => {
       console.log("File is not found");
     }
     const response = await cloudinary.uploader.upload(localFilePath, {
-      folder: "verdicto",
       resource_type: "auto",
+      asset_folder:"verdicto"
     });
+    console.log(response);
+    
     if (response) {
       fs.unlinkSync(localFilePath);
+      return response;
     }
+    return null;
+    
   } catch (error) {
     fs.unlinkSync(localFilePath);
     return null;
@@ -39,3 +44,7 @@ const deleteCloudinary = async function (public_id) {
 };
 
 export { uploadCloudinary, deleteCloudinary };
+
+
+
+

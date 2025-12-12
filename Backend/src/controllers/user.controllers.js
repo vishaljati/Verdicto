@@ -73,13 +73,13 @@ const deleteAccount = AsyncHandler(async (req, res) => {
   }
 
   //send otp
-  await sendOtp(user.email, user.fullName);
-  const { userEnteredOTP } = req.body;
-  const isOtpValid = await verifyOtp(user.email, userEnteredOTP);
+  // await sendOtp(user.email, user.fullName);
+  // const { userEnteredOTP } = req.body;
+  // const isOtpValid = await verifyOtp(user.email, userEnteredOTP);
 
-  if (!isOtpValid) {
-    throw new ApiError(401, "OTP does not matched or expired");
-  }
+  // if (!isOtpValid) {
+  //   throw new ApiError(401, "OTP does not matched or expired");
+  // }
 
   const deletedUser = await User.findByIdAndDelete(user._id);
   if (!deletedUser) {
@@ -104,13 +104,13 @@ const updatePassword = AsyncHandler(async (req, res) => {
   }
 
   //sent otp
-  await sendOtp(user.email, user.fullName);
-  const { userEnteredOTP } = req.body;
-  const isOtpValid = await verifyOtp(user.email, userEnteredOTP);
+  // await sendOtp(user.email, user.fullName);
+  // const { userEnteredOTP } = req.body;
+  // const isOtpValid = await verifyOtp(user.email, userEnteredOTP);
 
-  if (!isOtpValid) {
-    throw new ApiError(401, "OTP does not matched or expired");
-  }
+  // if (!isOtpValid) {
+  //   throw new ApiError(401, "OTP does not matched or expired");
+  // }
 
   const update = await User.findByIdAndUpdate(
     user._id,

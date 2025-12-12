@@ -1,16 +1,14 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: false, // true for 465, false for 587
+  service: "gmail", // Use "hotmail", "yahoo", etc. for other services
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: process.env.MAIL_SENDER_USER,
+    pass: process.env.MAIL_PASS_KEY,
   },
 });
 
-const FROM = `"${process.env.FROM_NAME}" <${process.env.FROM_EMAIL}>`;
+const FROM = `${process.env.MAIL_SENDER_USER}`
 
 async function sendMail({ to, subject, html, text }) {
   const mailOptions = {
@@ -30,8 +28,8 @@ async function sendMail({ to, subject, html, text }) {
 async function sendWelcomeEmail({ to, name }) {
   const subject = `Welcome, ${name}! to Verdicto`;
   const html = `
-<!DOCTYPE html>
-<html lang="en">
+ <!DOCTYPE html>
+ <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Welcome to Verdicto</title>
@@ -100,7 +98,7 @@ async function sendWelcomeEmail({ to, name }) {
             <tr>
               <td style="padding: 24px;">
                 <p style="margin: 0 0 12px; font-size: 16px; font-weight: 600;">
-                  Hi {{name}},
+                  Hi ${name},
                 </p>
 
                 <p style="margin: 0 0 12px; font-size: 14px; line-height: 1.6;">

@@ -34,7 +34,7 @@ const userSignUp = AsyncHandler(async (req, res) => {
   if (!(fullName || email || password)) {
     throw new ApiError(401, "Email and Password are required");
   }
-  const existedUser = User.findOne({ email: email });
+  const existedUser = await User.findOne({ email: email });
   if (existedUser) {
     throw new ApiError(409, "User Already existed");
   }
@@ -49,13 +49,13 @@ const userSignUp = AsyncHandler(async (req, res) => {
   }
 
   //TODO:OTP
-  await sendOtp(email, fullName);
-  const { userEnteredOTP } = req.body;
-  const isOtpValid = await verifyOtp(email, userEnteredOTP);
+  // await sendOtp(email, fullName);
+  // const { userEnteredOTP } = req.body;
+  // const isOtpValid = await verifyOtp(email, userEnteredOTP);
 
-  if (!isOtpValid) {
-    throw new ApiError(401, "OTP does not matched or expired");
-  }
+  // if (!isOtpValid) {
+  //   throw new ApiError(401, "OTP does not matched or expired");
+  // }
 
   await User.create({
     fullName,
@@ -72,7 +72,7 @@ const userSignUp = AsyncHandler(async (req, res) => {
   if (!createdUser) {
     throw new ApiError(500, "User sign up failed");
   }
-  const welcomeMail = await sendWelcomeEmail(email, fullName);
+  const welcomeMail = await sendWelcomeEmail({to:email,name:fullName});
   if (!welcomeMail) {
     throw new ApiError(500, "Welcome mail sending failed");
   }

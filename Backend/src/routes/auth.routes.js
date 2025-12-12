@@ -4,10 +4,10 @@ import {
   userLogIn,
   userLogout,
   refreshAccessToken,
-} from "../controllers/auth.controllers";
+} from "../controllers/auth.controllers.js";
 
-import { upload } from "../middlewares/multer.middlewares";
-import { verifyJWT } from "../middlewares/auth.middlewares";
+import { upload } from "../middlewares/multer.middlewares.js";
+import { verifyJWT } from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 

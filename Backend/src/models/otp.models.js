@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import bcrypt from "bcrypt"
 
 const otpSchema = new Schema({
   otp: {

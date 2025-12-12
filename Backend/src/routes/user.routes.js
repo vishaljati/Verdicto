@@ -5,10 +5,10 @@ import {
   updateProfile,
   deleteAccount,
   updatePassword,
-} from "../controllers/user.controllers";
+} from "../controllers/user.controllers.js";
 
-import { upload } from "../middlewares/multer.middlewares";
-import { verifyJWT } from "../middlewares/auth.middlewares";
+import { upload } from "../middlewares/multer.middlewares.js";
+import { verifyJWT } from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 
