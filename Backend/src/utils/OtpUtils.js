@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import { sendOtpEmail } from "./SendMail.js";
 
 const sendOtp = async (email, fullName) => {
+  await Otp.deleteOne({email})
+
   const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
   const hashedOtp = await bcrypt.hash(generatedOTP, 12);
   const expireIn = Date.now() * 5 * 60 * 1000; // 5 min
