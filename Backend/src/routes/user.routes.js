@@ -17,7 +17,7 @@ router.route("/me").get(verifyJWT, getUserProfile);
 router
   .route("/update-profile")
   .patch(verifyJWT, upload.single("avatar"), updateProfile);
-  
+
 router.route("/delete-account").delete(verifyJWT, deleteAccount);
 router.route("/update-password").post(verifyJWT, updatePassword);
 

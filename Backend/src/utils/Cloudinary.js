@@ -14,16 +14,15 @@ const uploadCloudinary = async (localFilePath) => {
     }
     const response = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
-      asset_folder:"verdicto"
+      asset_folder: "verdicto",
     });
     console.log(response);
-    
+
     if (response) {
       fs.unlinkSync(localFilePath);
       return response;
     }
     return null;
-    
   } catch (error) {
     fs.unlinkSync(localFilePath);
     return null;
@@ -44,7 +43,3 @@ const deleteCloudinary = async function (public_id) {
 };
 
 export { uploadCloudinary, deleteCloudinary };
-
-
-
-

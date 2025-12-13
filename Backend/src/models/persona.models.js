@@ -18,13 +18,12 @@ const personaSchema = new mongoose.Schema(
     },
     systemPromt: {
       type: String,
-      required: true
+      required: true,
     },
     isDefault: {
       type: Boolean,
-      required: true
+      required: true,
     },
-
   },
   {
     timestamps: true,

@@ -51,7 +51,7 @@ const updateProfile = AsyncHandler(async (req, res) => {
       $set: {
         avatar: avatar?.url,
         avatarPublicId: avatar?.public_id,
-        fullName:fullName || user.fullName,
+        fullName: fullName || user.fullName,
       },
     },
     { new: true }
@@ -98,7 +98,7 @@ const updatePassword = AsyncHandler(async (req, res) => {
 
   const ispasswordSame = await user.isPasswordCorrect(password);
   console.log(ispasswordSame);
-  
+
   if (ispasswordSame) {
     throw new ApiError(401, "Password can not be same");
   }

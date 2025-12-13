@@ -13,14 +13,13 @@ import { sendOtp, verifyOtp } from "../utils/OtpUtils.js";
 const generateAccessAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
-    const accessToken = user.generateAccessToken ();
+    const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
 
     return { accessToken, refreshToken };
-
   } catch (error) {
     console.log("ERROR :", error);
     throw new ApiError(
@@ -102,9 +101,10 @@ const userLogIn = AsyncHandler(async (req, res) => {
     throw new ApiError(401, "Password is incorrect");
   }
 
-  const { accessToken, refreshToken } =await generateAccessAndRefreshToken(user._id);
-  
-  
+  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
+    user._id
+  );
+
   const options = {
     httpOnly: true,
     secure: true,
