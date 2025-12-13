@@ -53,9 +53,6 @@ Respond ONLY with your argument in short structured manner.
                 personaName: persona.name,
                 roundNumber: round,
                 content: text.trim(),
-                meta: {
-                    model: modelName,
-                },
             });
         }
         round++;

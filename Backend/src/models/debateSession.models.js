@@ -22,7 +22,7 @@ const debateSessionSchema = new mongoose.Schema(
     },
     rounds: {
       type: Number,
-      default: 1,
+      
     },
     verdict: {
       type: mongoose.Schema.Types.ObjectId,

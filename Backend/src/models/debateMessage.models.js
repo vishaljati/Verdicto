@@ -11,7 +11,7 @@ const debateMessageSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    roundNo: {
+    roundNumber: {
       type: Number,
       required: true,
     },
