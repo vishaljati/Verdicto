@@ -6,7 +6,6 @@ if (!process.env.GEMINI_API_KEY) {
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-
 export const DEFAULT_MODEL = "gemini-2.5-flash-lite";
 
 // Model cache (avoid re-creating clients)

@@ -2,16 +2,15 @@ import mongoose from "mongoose";
 
 const verdictSchema = new mongoose.Schema(
   {
-
     user: {
       unique: true,
       type: mongoose.Schema.Types.ObjectId,
-      ref:"User",
+      ref: "User",
     },
     debateSession: {
       unique: true,
       type: mongoose.Schema.Types.ObjectId,
-      ref:"DebateSession",
+      ref: "DebateSession",
     },
     summary: {
       type: String,

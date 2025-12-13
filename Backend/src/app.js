@@ -21,7 +21,7 @@ import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import personaRouter from "./routes/persona.routes.js";
 import problemRouter from "./routes/problem.routes.js";
-import sessionRouter from "./routes/session.routes.js"
+import sessionRouter from "./routes/session.routes.js";
 
 //implement routes
 app.use("/api/v1/auth", authRouter);
