@@ -2,12 +2,22 @@ import mongoose from "mongoose";
 
 const verdictSchema = new mongoose.Schema(
   {
+
+    user: {
+      unique: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"User",
+    },
     debateSession: {
       unique: true,
       type: mongoose.Schema.Types.ObjectId,
-      ref: DebateSession,
+      ref:"DebateSession",
     },
-    finalVerdict: {
+    summary: {
+      type: String,
+      required: true,
+    },
+    recommendation: {
       type: String,
       required: true,
     },
