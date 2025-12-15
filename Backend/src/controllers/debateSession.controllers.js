@@ -123,12 +123,15 @@ const startSession = AsyncHandler(async (req, res) => {
       )
     );
 
-    // 4. Run debate async (critical)
-    runSessionAsync({
-      sessionId: session._id,
-      problem,
-      userId,
-    });
+    // 4. Run debate async 
+    while (session.status === "running") {
+      runSessionAsync({
+        sessionId: session._id,
+        problem,
+        userId,
+      });
+    }
+    
   } catch (error) {
     console.error("Start session error:", error);
     return null;
@@ -147,7 +150,7 @@ const getSession = AsyncHandler(async (req, res) => {
     });
 
     if (!session) {
-      throw new ApiError(403, "Session not exist");
+      throw new ApiError(404, "Session not exist");
     }
 
     return res
@@ -175,7 +178,7 @@ const listSessionsForDecision = AsyncHandler(async (req, res) => {
     }
 
     const sessions = await DebateSession.find({
-      decision: problemId,
+      problem: problemId,
       user: userId,
     }).sort({ createdAt: -1 });
 
