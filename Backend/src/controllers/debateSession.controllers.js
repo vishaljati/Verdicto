@@ -123,7 +123,7 @@ const startSession = AsyncHandler(async (req, res) => {
       )
     );
 
-    // 4. Run debate async 
+    // 4. Run debate async
     while (session.status === "running") {
       runSessionAsync({
         sessionId: session._id,
@@ -131,7 +131,6 @@ const startSession = AsyncHandler(async (req, res) => {
         userId,
       });
     }
-    
   } catch (error) {
     console.error("Start session error:", error);
     return null;
