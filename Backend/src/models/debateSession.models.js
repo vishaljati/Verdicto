@@ -14,7 +14,7 @@ const debateSessionSchema = new mongoose.Schema(
     },
     status: {
       enum: ["running", "completed", "failed"],
-      default: "running",
+      
     },
     model: {
       type: String,

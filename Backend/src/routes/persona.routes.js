@@ -5,9 +5,9 @@ import {
   createPersona,
   updatePersona,
   deletePersona,
-} from "../controllers/persona.controllers";
+} from "../controllers/persona.controllers.js";
 
-import { verifyJWT } from "../middlewares/auth.middlewares";
+import { verifyJWT } from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 router.use(verifyJWT);

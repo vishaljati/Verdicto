@@ -1,4 +1,4 @@
-import { DebateSession } from "../models/debateSession.models";
+import { DebateSession } from "../models/debateSession.models.js";
 import mongoose from "mongoose";
 import { ApiError, AsyncHandler, ApiResponse } from "../utils/index.js";
 import { Problem } from "../models/problem.models.js";

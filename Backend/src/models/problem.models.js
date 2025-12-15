@@ -17,7 +17,6 @@ const problemSchema = new mongoose.Schema(
     },
     status: {
       enum: ["open", "resolved", "failed"],
-      default: "open",
     },
   },
   { timestamps: true }
