@@ -6,6 +6,7 @@ import {
   listSessionsForDecision,
   abortSession,
 } from "../controllers/debateSession.controllers.js";
+import  { getVerdict , exportVerdict } from "../controllers/verdict.controllers.js"
 import { creditLimit } from "../middlewares/ratelimit.middlewares.js"
 
 const router = express.Router();
@@ -18,5 +19,7 @@ router
   .get(listSessionsForDecision);
 
 router.route("/:sessionId").get(getSession).patch(abortSession);
+router.route("/sessionId/verdict/export").get(exportVerdict)
+router.route("/sessionId/verdict").get(getVerdict)
 
 export default router;
