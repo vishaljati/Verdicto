@@ -65,7 +65,7 @@ const runSessionAsync = async ({ sessionId, problem, userId }) => {
     session.status = "completed";
     session.rounds = debateResult.rounds;
     session.verdict = verdict._id;
-    await session.save();
+    await session.save({validateBeforeSave:false});
   } catch (error) {
     console.error("Async session execution failed:", error);
 
