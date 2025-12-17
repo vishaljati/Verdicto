@@ -2,11 +2,11 @@ import { User } from "../models/user.models.js";
 import mongoose from "mongoose";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
-import { uploadCloudinary, deleteCloudinary } from "../utils/Cloudinary.js";
-import { sendMail, sendWelcomeEmail, sendOtpEmail } from "../utils/SendMail.js";
+import { uploadCloudinary } from "../utils/Cloudinary.js";
+import { sendMail, sendWelcomeEmail } from "../utils/SendMail.js";
 import jwt from "jsonwebtoken";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
-import { sendOtp, verifyOtp } from "../utils/OtpUtils.js";
+import { defaultAvatar } from "../constant.js"
 
 //TODO:Include OTP , OAuth callback
 
@@ -36,26 +36,20 @@ const userSignUp = AsyncHandler(async (req, res) => {
   }
   const existedUser = await User.findOne({ email: email });
   if (existedUser) {
-    throw new ApiError(409, "User Already existed");
+    throw new ApiError(409, "User Already exists");
   }
 
   const avatarLocalPath = req.file?.path;
-  if (!avatarLocalPath) {
-    throw new ApiError(401, "Avatar is required");
+
+    if (!avatarLocalPath) {
+     avatarLocalPath=defaultAvatar;
   }
+  
   const avatar = await uploadCloudinary(avatarLocalPath);
   if (!avatar) {
-    throw new ApiError(500, "Avatar Upload failed");
+    throw new ApiError(500,"Avatar upload failed");
   }
 
-  //TODO:OTP
-  // await sendOtp(email, fullName);
-  // const { userEnteredOTP } = req.body;
-  // const isOtpValid = await verifyOtp(email, userEnteredOTP);
-
-  // if (!isOtpValid) {
-  //   throw new ApiError(401, "OTP does not matched or expired");
-  // }
 
   await User.create({
     fullName,
