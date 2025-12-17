@@ -6,6 +6,7 @@ import {
   listSessionsForDecision,
   abortSession,
 } from "../controllers/debateSession.controllers.js";
+import { creditLimit } from "../middlewares/ratelimit.middlewares.js"
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.use(verifyJWT);
 
 router
   .route("/decision/:problemId")
-  .post(startSession)
+  .post(creditLimit,startSession)
   .get(listSessionsForDecision);
 
 router.route("/:sessionId").get(getSession).patch(abortSession);

@@ -28,6 +28,10 @@ const userSchema = new Schema(
     refreshToken: {
       type: String,
     },
+    credits:{
+      type:Number,
+      default:2
+    },
     debateHistory: [
       {
         type: mongoose.Schema.Types.ObjectId, // debateHistory id
