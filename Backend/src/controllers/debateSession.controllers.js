@@ -81,6 +81,11 @@ const startSession = AsyncHandler(async (req, res) => {
     const userId = req.user._id;
     const { problemId } = req.params;
     const { settings, rounds } = req.body;
+    
+     if (rounds>2) {
+      throw new ApiError(401,"Max round limit is 2");
+      
+     }
 
     // 1. Validate decision ownership
     const problem = await Problem.findOne({
@@ -103,8 +108,8 @@ const startSession = AsyncHandler(async (req, res) => {
       user: userId,
       problem: problemId,
       model: "gemini-2.5-flash-lite",
-      settings: settings || { maxRounds: 3 },
-      rounds: settings || 1,
+      settings: settings || { maxRounds: 2 },
+      rounds: rounds || 1,
       status: "running",
     });
     if (!session) {
