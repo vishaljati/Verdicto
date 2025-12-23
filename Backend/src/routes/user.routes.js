@@ -5,6 +5,7 @@ import {
   updateProfile,
   deleteAccount,
   updatePassword,
+  debateHistory
 } from "../controllers/user.controllers.js";
 
 import { upload } from "../middlewares/multer.middlewares.js";
@@ -20,5 +21,6 @@ router
 
 router.route("/delete-account").delete(verifyJWT, deleteAccount);
 router.route("/update-password").post(verifyJWT, updatePassword);
+router.route("/history").get(verifyJWT,debateHistory)
 
 export default router;

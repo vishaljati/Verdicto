@@ -31,13 +31,7 @@ const userSchema = new Schema(
     credits:{
       type:Number,
       default:2
-    },
-    debateHistory: [
-      {
-        type: mongoose.Schema.Types.ObjectId, // debateHistory id
-        ref: "DebateSession",
-      },
-    ],
+    }
   },
   {
     timestamps: true,

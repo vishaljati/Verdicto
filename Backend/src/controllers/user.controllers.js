@@ -5,6 +5,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
 import { uploadCloudinary, deleteCloudinary } from "../utils/Cloudinary.js";
 import { sendOtp, verifyOtp } from "../utils/OtpUtils.js";
+import { DebateSession } from "../models/debateSession.models.js";
 
 //Purpose: User profile, settings, basic account operations
 
@@ -131,6 +132,18 @@ const updatePassword = AsyncHandler(async (req, res) => {
 });
 
 //TODO:usage stats (decisions/sessions count)
+const debateHistory=AsyncHandler(async (req,res) => {
+   const user=req.user._id;
+   const debates=await DebateSession.find({user:user})
+
+   if (!debates) {
+     throw new ApiError(404,"No history found"); 
+   }
+
+   return res.status(200)
+              .json(new ApiResponse(200,{debates},"Debate hsitory fetch successfully"))
+
+})
 
 export {
   getUserById,
@@ -138,4 +151,5 @@ export {
   updateProfile,
   deleteAccount,
   updatePassword,
+  debateHistory
 };
