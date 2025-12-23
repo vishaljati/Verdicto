@@ -16,7 +16,7 @@ const personaSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    systemPromt: {
+    systemPrompt: {
       type: String,
       required: true,
     },
