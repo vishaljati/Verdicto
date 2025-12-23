@@ -23,6 +23,7 @@ import personaRouter from "./routes/persona.routes.js";
 import problemRouter from "./routes/problem.routes.js";
 import sessionRouter from "./routes/session.routes.js";
 import messageRouter from "./routes/debateMessage.routes.js";
+import healthRouter from "./routes/healthcheck.routes.js"
 
 //implement routes
 app.use("/api/v1/auth", authRouter);
@@ -32,5 +33,6 @@ app.use("/api/v1/personas", personaRouter);
 app.use("/api/v1/decisions", problemRouter);
 app.use("/api/v1/sessions", sessionRouter);
 app.use("/api/v1/messages", messageRouter);
+app.use("/api/v1/health", healthRouter);
 
 export default app;
